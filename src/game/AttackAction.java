@@ -35,8 +35,10 @@ public class AttackAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
+
 		Weapon weapon = actor.getWeapon();
 
+		//current rng, 50% chance of hit for all weapons
 		if (rand.nextBoolean()) {
 			return actor + " misses " + target + ".";
 		}
@@ -44,7 +46,10 @@ public class AttackAction extends Action {
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
+		
+		//change this to a call to the takeDamage method
 		target.hurt(damage);
+		
 		if (!target.isConscious()) {
 			Item corpse = new PortableItem("dead " + target, '%');
 			map.locationOf(target).addItem(corpse);
