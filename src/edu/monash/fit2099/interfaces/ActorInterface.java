@@ -7,4 +7,6 @@ package edu.monash.fit2099.interfaces;
 
 public interface ActorInterface {
 
+
+	//Implement takeDamage(int damage, map map)
 }

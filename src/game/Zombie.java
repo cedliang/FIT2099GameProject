@@ -17,9 +17,11 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  */
 public class Zombie extends ZombieActor {
 	private Behaviour[] behaviours = {
+			//add new behaviour to pick something up
 			new AttackBehaviour(ZombieCapability.ALIVE),
 			new HuntBehaviour(Human.class, 10),
 			new WanderBehaviour()
+		
 	};
 
 	public Zombie(String name) {
@@ -29,6 +31,12 @@ public class Zombie extends ZombieActor {
 
 	@Override
 	public IntrinsicWeapon getIntrinsicWeapon() {
+		
+		//TODO: If zombie has arms (implement private attribute): select between punch and bite
+		//If not, then just return bite attack
+		
+		
+		//Implement intrinsic weapons as private attributes of the zombie class, then have this method select randomly between them (spec says 50% probability)
 		return new IntrinsicWeapon(10, "punches");
 	}
 
@@ -43,6 +51,16 @@ public class Zombie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		
+		//add 10% of saying brains
+		
+		//We can hardcode in the behaviours instead of running it over a loop. This lets us handle the checks for movement behviours separately to handling the 
+		//attack behaviours. Then, we can add the possibility for huntbehaviour or wanderbehaviour to return null (skipping it)
+		// if we query lastAction
+		
+		
+		
+		
 		for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
 			if (action != null)
