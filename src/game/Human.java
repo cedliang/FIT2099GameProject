@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.IntrinsicWeapon;
 
 /**
  * Class representing an ordinary human.
@@ -40,6 +41,16 @@ public class Human extends ZombieActor {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// FIXME humans are pretty dumb, maybe they should at least run away from zombies?
 		return behaviour.getAction(this, map);
+	}
+
+	@Override
+	public IntrinsicWeapon getIntrinsicWeapon() {
+		return new HumanPunch();
+	}
+	
+	@Override
+	public void takeDamage(int damage, GameMap map) {
+		this.hurt(damage);
 	}
 
 }

@@ -37,4 +37,10 @@ public class Bug extends Actor {
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(1, "stings");
 	}
+
+	@Override
+	public void takeDamage(int damage, GameMap map) {
+		// TODO Auto-generated method stub
+		
+	}
 }

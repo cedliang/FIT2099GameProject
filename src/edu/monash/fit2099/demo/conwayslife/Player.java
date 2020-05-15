@@ -61,4 +61,10 @@ public class Player extends Actor {
 			return null;
 		}
 	}
+
+	@Override
+	public void takeDamage(int damage, GameMap map) {
+		// TODO Auto-generated method stub
+		
+	}
 }

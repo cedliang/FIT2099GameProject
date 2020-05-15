@@ -38,8 +38,10 @@ public class AttackAction extends Action {
 
 		Weapon weapon = actor.getWeapon();
 
-		//current rng, 50% chance of hit for all weapons
-		if (rand.nextBoolean()) {
+		double probability = WeaponHitProb(weapon, actor); // gets probability of weapon for specified actor
+		double randomNumber = rand.nextInt(100);
+		// Actor misses their target if the random number is greater than the probability to hit
+		if (randomNumber > probability) {
 			return actor + " misses " + target + ".";
 		}
 
@@ -47,8 +49,13 @@ public class AttackAction extends Action {
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
 		
-		//change this to a call to the takeDamage method
-		target.hurt(damage);
+		// When an actor is hurt, go through their specified taking damage logic
+		target.takeDamage(damage, map);
+		
+		// When the ZombieBite attack is used, heals the actor for 5 hp
+		if (weapon instanceof ZombieBite) {	
+			actor.heal(5);
+		}
 		
 		if (!target.isConscious()) {
 			Item corpse = new PortableItem("dead " + target, '%');
@@ -65,6 +72,32 @@ public class AttackAction extends Action {
 		}
 
 		return result;
+	}
+	
+	public double WeaponHitProb(Weapon weapon, Actor actor) {
+		double probability = 50;
+		if (weapon instanceof ZombieArm) {
+			probability = 40;
+		}
+		else if (weapon instanceof ZombieLeg) {
+			probability = 40;
+		}
+		else if (weapon instanceof ZombieClub) {
+			probability = 40;
+		}
+		else if (weapon instanceof ZombieMace) {
+			probability = 40;
+		}
+		else if (weapon instanceof ZombieBite) {
+			probability = 50;
+		}
+		else if (weapon instanceof ZombiePunch) {
+			probability = 50;
+		}
+		else if (weapon instanceof HumanPunch) {
+			probability = 100;
+		}
+		return probability;
 	}
 
 	@Override
