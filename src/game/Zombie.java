@@ -28,7 +28,7 @@ public class Zombie extends ZombieActor {
 	};
 	
 	private int numberOfArms = 2;	// Number of arms the zombie has
-	private int numberOfLegs = 1;	// Number of legs the zombie has
+	private int numberOfLegs = 2;	// Number of legs the zombie has
 	
 	protected Random rand = new Random();
 
