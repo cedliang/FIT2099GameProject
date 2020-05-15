@@ -169,9 +169,13 @@ public class Zombie extends ZombieActor {
 
 	private void limbFallOff(GameMap map) {
 		// TODO: Add logic to dropping weapons when arms fall off
-		int counter = (this.numberOfArms + this.numberOfLegs);
-		Location location = map.locationOf(this);
-		while (counter == (this.numberOfArms + this.numberOfLegs)) {
+		// If a limb is taken off the zombie, reduce the number of arms/legs it has
+		// and create the specified limb weapon item at the location of the zombie
+		int prevNumberOfLimbs = (this.numberOfArms + this.numberOfLegs); // This counter represents the previous count of limbs
+		Location location = map.locationOf(this); // Location of the zombie on the map
+		// When a zombie loses a limb, then this loop ends, ensuring that a limb was lost
+		while (prevNumberOfLimbs == (this.numberOfArms + this.numberOfLegs)) {
+			// If the zombie has atleast a leg and arm, then randomly choose which to take off
 			if (this.numberOfArms > 0 && this.numberOfLegs > 0) {
 				int probLimbs = rand.nextInt(2);
 				if (probLimbs == 0) {
@@ -182,11 +186,13 @@ public class Zombie extends ZombieActor {
 					this.numberOfLegs--;
 					map.at(location.x(), location.y()).addItem(new ZombieLeg());
 				}
+			// If the zombie only has atleast an arm, then take off the arm
 			}
 			else if (this.numberOfArms > 0 && this.numberOfLegs == 0) {
 				this.numberOfArms--;
 				map.at(location.x(), location.y()).addItem(new ZombieArm());
 			}
+			// If the zombie only has atleast a leg, then take off the leg
 			else if (this.numberOfArms == 0 && this.numberOfLegs > 0) {
 				this.numberOfLegs--;
 				map.at(location.x(), location.y()).addItem(new ZombieLeg());
