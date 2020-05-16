@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
+import edu.monash.fit2099.engine.DropItemAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import edu.monash.fit2099.engine.Item;
@@ -32,7 +33,7 @@ public class Zombie extends ZombieActor {
 	private int numberOfArms = 2;	// Number of arms the zombie has
 	private int numberOfLegs = 2;	// Number of legs the zombie has
 	
-	protected Random rand = new Random();
+	private Random rand = new Random();
 
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
@@ -74,10 +75,6 @@ public class Zombie extends ZombieActor {
 		// we need to check if the zombie has a weapon in their inventory, and if they do then we do not allow them to pick up another
 		// weapon, otherwise it will be very cluttered with all of the limbs falling off at their location and they continuously pick up
 		// their own limbs as they fall off.
-		
-		//We can hardcode in the behaviours instead of running it over a loop. This lets us handle the checks for movement behviours separately to handling the 
-		//attack behaviours. Then, we can add the possibility for huntbehaviour or wanderbehaviour to return null (skipping it)
-		// if we query lastAction
 		
 		// Zombies have a 10% chance to say "Braaaaaains" during their turn
 		// This does not use up their turn
@@ -154,19 +151,19 @@ public class Zombie extends ZombieActor {
 		double probToTakeLimbOff = 0.3; // probability for a limb to fall off
 		int numberOfLimbs = (this.numberOfArms + this.numberOfLegs);
 		if (numberOfLimbs > 0) {
-			if (prob < Math.pow(probToTakeLimbOff, 4)) {
+			if (prob < Math.pow(probToTakeLimbOff, 10)) {
 				// All limbs fall off with a probToTakeLimbOff^4 probability
 				for (int i = 0; i < 4; i++) {
 					this.limbFallOff(map);
 				}
 			}
-			else if (prob < Math.pow(probToTakeLimbOff, 3)) {
+			else if (prob < Math.pow(probToTakeLimbOff, 9)) {
 				// 3 limbs fall off with a probToTakeLimbOff^3 probability
 				for (int i = 0; i < 3; i++) {
 					this.limbFallOff(map);
 				}
 			}
-			else if (prob < Math.pow(probToTakeLimbOff, 2)) {
+			else if (prob < Math.pow(probToTakeLimbOff, 8)) {
 				// 2 limbs fall off with a probToTakeLimbOff^2 probability
 				for (int i = 0; i < 2; i++) {
 					this.limbFallOff(map);
@@ -193,23 +190,51 @@ public class Zombie extends ZombieActor {
 				if (probLimbs == 0) {
 					this.numberOfArms--;
 					map.at(location.x(), location.y()).addItem(new ZombieArm());
+					dropWeapon(map);
 				}
 				else {
 					this.numberOfLegs--;
 					map.at(location.x(), location.y()).addItem(new ZombieLeg());
-
 				}
 			// If the zombie only has atleast an arm, then take off the arm
 			}
 			else if (this.numberOfArms > 0 && this.numberOfLegs == 0) {
 				this.numberOfArms--;
 				map.at(location.x(), location.y()).addItem(new ZombieArm());
-
+				dropWeapon(map);
 			}
 			// If the zombie only has atleast a leg, then take off the leg
 			else if (this.numberOfArms == 0 && this.numberOfLegs > 0) {
 				this.numberOfLegs--;
 				map.at(location.x(), location.y()).addItem(new ZombieLeg());
+			}
+		}
+	}
+	
+	private void dropWeapon(GameMap map) {
+		// Logic for zombies to drop their weapons if their arms are knocked off
+		// Assuming zombies can only have 1 weapon at a time
+		if (this.numberOfArms == 1) {
+			//drop weapon with 50% probability
+			int randomNumber = rand.nextInt(2);
+			if (randomNumber == 0) {
+				for (Item item : this.getInventory()) {
+					if (item instanceof WeaponItem) {
+						DropItemAction dropItem = new DropItemAction(item);
+						dropItem.execute(this, map);
+						return;
+					}
+				}
+			}
+		}
+		else if (this.numberOfArms == 0) {
+			//drop weapon with 100% probability
+			for (Item item : this.getInventory()) {
+				if (item instanceof WeaponItem) {
+					DropItemAction dropItem = new DropItemAction(item);
+					dropItem.execute(this, map);
+					return;
+				}
 			}
 		}
 	}
