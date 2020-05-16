@@ -8,9 +8,11 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
+import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.MoveActorAction;
 import edu.monash.fit2099.engine.PickUpItemAction;
+import edu.monash.fit2099.engine.WeaponItem;
 
 /**
  * A Zombie.
@@ -86,13 +88,23 @@ public class Zombie extends ZombieActor {
 		
 		// If the zombie has atleast 1 arm then it should pick up a weapon
 		// at it's location if a weapon is present.
-		// Still have to identify how many items the zombie can pick up, right now
-		// the zombie HAS to pick up all of the items at their location before they
-		// can use a different action, limiting the zombies ability to attack or move
-		if (this.numberOfArms > 0) {
-			for (Action action : actions) { // return first action that results in a pickupitemaction
-				if (action instanceof PickUpItemAction) {
-					return action;
+		// Zombie only picks up 1 weapon item if they do not currently have a weapon.
+		// Once they have a weapon in their inventory then they will no longer be forced
+		// to pick up other weapons as of right now.
+		
+		// May need to put this into a method to check if the actor has a weapon in the inventory
+		// Solves the problem of a zombie picking up all of the weapons
+		boolean weaponInInventory = false;
+		for (Item item : this.getInventory()) {
+			if (item instanceof WeaponItem) {
+				weaponInInventory = true;
+			}
+		}
+		if (this.numberOfArms > 0 && !weaponInInventory) {
+			Location locationOfZombie = map.locationOf(this);
+			for (Item item : locationOfZombie.getItems()) {
+				if (item instanceof WeaponItem) {
+					return new PickUpItemAction(item);
 				}
 			}
 		}
@@ -139,7 +151,7 @@ public class Zombie extends ZombieActor {
 		// lose at least 1 limb.
 		this.hurt(damage);
 		double prob = rand.nextDouble(); // A value between 0.0 (inc) and 1.0 (exc)
-		double probToTakeLimbOff = 0.25; // probability for a limb to fall off
+		double probToTakeLimbOff = 0.3; // probability for a limb to fall off
 		int numberOfLimbs = (this.numberOfArms + this.numberOfLegs);
 		if (numberOfLimbs > 0) {
 			if (prob < Math.pow(probToTakeLimbOff, 4)) {
@@ -185,12 +197,14 @@ public class Zombie extends ZombieActor {
 				else {
 					this.numberOfLegs--;
 					map.at(location.x(), location.y()).addItem(new ZombieLeg());
+
 				}
 			// If the zombie only has atleast an arm, then take off the arm
 			}
 			else if (this.numberOfArms > 0 && this.numberOfLegs == 0) {
 				this.numberOfArms--;
 				map.at(location.x(), location.y()).addItem(new ZombieArm());
+
 			}
 			// If the zombie only has atleast a leg, then take off the leg
 			else if (this.numberOfArms == 0 && this.numberOfLegs > 0) {
