@@ -31,10 +31,9 @@ public class AttackAction extends Action {
 	public AttackAction(Actor target) {
 		this.target = target;
 	}
-
+	
 	@Override
 	public String execute(Actor actor, GameMap map) {
-
 
 		Weapon weapon = actor.getWeapon();
 
@@ -74,6 +73,13 @@ public class AttackAction extends Action {
 		return result;
 	}
 	
+	/**
+	 * Returns the probability that a specific Weapon's hit probability.
+	 * 
+	 * @param weapon Weapon that is used for the attack
+	 * @param actor the Actor that is attacking
+	 * @return probability to hit the target with the Weapon
+	 */
 	public double WeaponHitProb(Weapon weapon, Actor actor) {
 		double probability = 50;
 		if (weapon instanceof ZombieArm) {
