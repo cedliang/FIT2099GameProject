@@ -20,7 +20,8 @@ public class FarmingBehaviour implements Behaviour{
 			actions.add(new HarvestAction(map.locationOf(actor)));
 		}
 		for (Exit exit : map.locationOf(actor).getExits()) {
-            Location adjacentSquare = exit.getDestination();
+            Location adjacentSquare = exit.getDestination();         
+            
             if (adjacentSquare.getGround().hasCapability(CropCapability.HARVESTABLE)) {
             	actions.add(new HarvestAction(adjacentSquare));
             }

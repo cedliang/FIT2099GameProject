@@ -27,11 +27,12 @@ public class Crop extends Ground {
 		super.tick(location);
 
 		age++;
-		if (age >= 20)
+		if (age >= 20) {
 			displayChar = '!';
 			if (hasCapability(CropCapability.HARVESTABLE)==false) {
 				addCapability(CropCapability.HARVESTABLE);
 			}
+		}
 	}
 
 }
