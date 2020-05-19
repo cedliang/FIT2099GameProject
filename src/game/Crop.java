@@ -5,10 +5,11 @@ import edu.monash.fit2099.engine.Location;
 
 public class Crop extends Ground {
 
-	private int age = 0;
+	private int age;
 
 	public Crop() {
 		super('~');
+		age=0;		
 		addCapability(CropCapability.FERTILISABLE);
 	}
 	

@@ -71,7 +71,7 @@ public class AttackAction extends Action {
 		}
 		
 		else {
-			result += target +" is now on " +actor.getCurrentHitPoints()+" HP.";
+			result += " "+target +" is now on " +target.getCurrentHitPoints()+" HP.";
 		}
 		
 		

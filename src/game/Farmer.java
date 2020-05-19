@@ -13,7 +13,7 @@ public class Farmer extends Human {
 			new WanderBehaviour()
 	};
 	
-	public Farmer(String name, char displayChar, int hitPoints) {
+	public Farmer(String name) {
 		super(name, 'F', 50);
 	}
 	
