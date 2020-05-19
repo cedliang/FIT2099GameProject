@@ -18,8 +18,15 @@ public class HarvestAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		Dirt dirt = new Dirt();
-		harvestTargetLocation.setGround(dirt);	
+		harvestTargetLocation.setGround(dirt);
+		
+		if (actor instanceof Player){
+			actor.addItemToInventory(new Food());
+		}
+		else {
 		harvestTargetLocation.addItem(new Food());
+		}
+		
 		return menuDescription(actor);
 	}
 
