@@ -10,5 +10,6 @@ import edu.monash.fit2099.engine.GameMap;
 public interface ActorInterface {
 	//Implement takeDamage(int damage, map map)
 	public void takeDamage(int damage, GameMap map);
+	public int getCurrentHitPoints();
 
 }

@@ -69,6 +69,12 @@ public class AttackAction extends Action {
 			
 			result += System.lineSeparator() + target + " is killed.";
 		}
+		
+		else {
+			result += target +" is now on " +actor.getCurrentHitPoints()+" HP.";
+		}
+		
+		
 
 		return result;
 	}
