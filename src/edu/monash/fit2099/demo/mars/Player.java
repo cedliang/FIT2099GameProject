@@ -35,4 +35,8 @@ public class Player extends Actor {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public int getCurrentHitPoints() {
+		return hitPoints;
+	}
 }
