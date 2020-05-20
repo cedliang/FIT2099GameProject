@@ -3,13 +3,11 @@ package game;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.Exit;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import edu.monash.fit2099.engine.Item;
-import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.PickUpItemAction;
-import edu.monash.fit2099.engine.WeaponItem;
+
 
 /**
  * Class representing an ordinary human.
