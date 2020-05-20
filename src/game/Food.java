@@ -9,6 +9,7 @@ public class Food extends PortableItem {
 	public Food() {
 		super("food",'+');
 		healFactor = 30;
+		this.allowableActions.add(new EatFoodAction(this));
 	}
 
 	public int getHealFactor() {
