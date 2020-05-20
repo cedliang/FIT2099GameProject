@@ -11,5 +11,6 @@ public class ZombieArm extends WeaponItem {
 
 	public ZombieArm() {
 		super("Zombie Arm", '}', 15, "whacks");
+		this.allowableActions.add(new CraftAction(this, new ZombieClub()));
 	}
 }

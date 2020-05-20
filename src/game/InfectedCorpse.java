@@ -11,6 +11,7 @@ public class InfectedCorpse extends Corpse {
 		
 	public InfectedCorpse(Actor actor) {
 		super(actor);
+		displayChar = '‰';
 		age = 0;		
 		reanimatesWhen = rand.nextInt(6) + 5;
 	}
