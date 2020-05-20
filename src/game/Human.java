@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.PickUpItemAction;
+import edu.monash.fit2099.engine.DoNothingAction;
 
 
 /**
@@ -17,7 +18,10 @@ import edu.monash.fit2099.engine.PickUpItemAction;
  *
  */
 public class Human extends ZombieActor {
-	private Behaviour behaviour = new WanderBehaviour();
+	private Behaviour behaviours[] = {
+			//TODO remove this if cannot implement foragebehaviour class
+			//new ForageBehaviour(Food.class, 10), 
+			new WanderBehaviour()};
 
 	/**
 	 * The default constructor creates default Humans
@@ -40,6 +44,7 @@ public class Human extends ZombieActor {
 		super(name, displayChar, hitPoints, ZombieCapability.ALIVE);
 	}
 
+	//Humans now hunt down Food within 5 blocks and hoards it in their inventory
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		
@@ -58,8 +63,12 @@ public class Human extends ZombieActor {
 				return new PickUpItemAction(item);
 			}
 		}
-		
-		return behaviour.getAction(this, map);
+		for (Behaviour behaviour : behaviours) {
+			Action action = behaviour.getAction(this, map);
+			if (action != null)
+				return action;
+		}
+		return new DoNothingAction();
 	}
 
 	@Override

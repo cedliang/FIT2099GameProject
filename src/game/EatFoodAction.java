@@ -38,7 +38,10 @@ public class EatFoodAction extends Action {
 
 	@Override
 	public String menuDescription(Actor actor) {
-		return (actor + " eats some food");
+		if((actor.getInventory().contains(food))) {
+			return (actor + " eats some food (from inventory)");
+		}
+		return (actor + " eats some food (from the ground)");
 	}
 
 }

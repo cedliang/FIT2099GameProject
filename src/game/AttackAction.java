@@ -51,10 +51,12 @@ public class AttackAction extends Action {
 		// When an actor is hurt, go through their specified taking damage logic
 		target.takeDamage(damage, map);
 		
-		// When the ZombieBite attack is used, heals the actor for 5 hp
 		if (weapon instanceof ZombieBite) {	
 			actor.heal(5);
-		}
+			result += " "+actor +" is now on "+actor.getCurrentHitPoints()+" HP.";
+		}	
+		
+		result += System.lineSeparator();
 		
 		if (!target.isConscious()) {
 			Item corpse = new PortableItem("dead " + target, '%');
@@ -67,14 +69,15 @@ public class AttackAction extends Action {
 				drop.execute(target, map);
 			map.removeActor(target);	
 			
-			result += System.lineSeparator() + target + " is killed.";
+			result += target + " is killed.";
 		}
 		
 		else {
-			result += " "+target +" is now on " +target.getCurrentHitPoints()+" HP.";
+			result += target +" is now on " +target.getCurrentHitPoints()+" HP.";
 		}
 		
-		
+		// When the ZombieBite attack is used, heals the actor for 5 hp
+	
 
 		return result;
 	}
