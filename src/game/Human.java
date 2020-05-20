@@ -61,16 +61,6 @@ public class Human extends ZombieActor {
 			}
 		}
 		
-		//picks up food on adjacent squares
-		for (Exit exit : map.locationOf(this).getExits()) {
-            Location adjacentSquare = exit.getDestination();         
-            for (Item item : adjacentSquare.getItems()) {
-                if (item instanceof Food) {
-                	return new PickUpItemAction(item);
-                }
-            }
-        }
-		
 		return behaviour.getAction(this, map);
 	}
 
