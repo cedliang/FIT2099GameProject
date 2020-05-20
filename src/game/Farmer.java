@@ -8,9 +8,9 @@ import edu.monash.fit2099.engine.DoNothingAction;
 
 public class Farmer extends Human {
 	
+	//farmer specific behaviour
 	private Behaviour[] behaviours = {
-			new FarmingBehaviour(),
-			new WanderBehaviour()
+			new FarmingBehaviour()
 	};
 	
 	public Farmer(String name) {
@@ -26,7 +26,7 @@ public class Farmer extends Human {
 			if (action != null)
 				return action;
 		}
-		return new DoNothingAction();
+		return super.playTurn(actions, lastAction, map, display);
 	}
 
 }

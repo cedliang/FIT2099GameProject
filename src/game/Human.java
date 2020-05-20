@@ -3,8 +3,13 @@ package game;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
+import edu.monash.fit2099.engine.Exit;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
+import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.PickUpItemAction;
+import edu.monash.fit2099.engine.WeaponItem;
 
 /**
  * Class representing an ordinary human.
@@ -39,7 +44,33 @@ public class Human extends ZombieActor {
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		// FIXME humans are pretty dumb, maybe they should at least run away from zombies?
+		
+		if (hitPoints < maxHitPoints) {
+			for (Item item : getInventory()) {
+				if (item instanceof Food) {
+					Food food = (Food) item;
+					return new EatFoodAction(food);
+				}
+			}
+		}
+		
+		//picks up food on current square
+		for (Item item : map.locationOf(this).getItems()) {
+			if (item instanceof Food) {
+				return new PickUpItemAction(item);
+			}
+		}
+		
+		//picks up food on adjacent squares
+		for (Exit exit : map.locationOf(this).getExits()) {
+            Location adjacentSquare = exit.getDestination();         
+            for (Item item : adjacentSquare.getItems()) {
+                if (item instanceof Food) {
+                	return new PickUpItemAction(item);
+                }
+            }
+        }
+		
 		return behaviour.getAction(this, map);
 	}
 

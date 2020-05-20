@@ -87,6 +87,7 @@ public class Zombie extends ZombieActor {
 		int probability = rand.nextInt(100);
 		if (probability < 10) {
 			display.println("Braaaaaaaaaaaaaaiinsssss");
+			return new DoNothingAction();
 		}
 		
 		// Solves the problem of a Zombie picking up all of the weapons.
