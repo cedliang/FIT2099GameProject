@@ -59,7 +59,14 @@ public class AttackAction extends Action {
 		result += System.lineSeparator();
 		
 		if (!target.isConscious()) {
-			Item corpse = new PortableItem("dead " + target, '%');
+			Corpse corpse;
+			if ((actor.hasCapability(ZombieCapability.UNDEAD)) && (target.hasCapability(ZombieCapability.ALIVE))){
+				corpse = new InfectedCorpse(target);
+			}
+			else {
+				corpse = new Corpse(target);
+			}
+
 			map.locationOf(target).addItem(corpse);
 			
 			Actions dropActions = new Actions();
