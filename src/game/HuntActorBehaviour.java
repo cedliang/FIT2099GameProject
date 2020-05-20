@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 
 /**
- * Returns a MoveAction that will take the Actor closer to the nearest instance of a target class.
+ * Returns a MoveAction that will take the Actor closer to the nearest instance of a Actor class.
  * 
  * This uses a breadth-first search algorithm and is based on code written for the
  * FIT2099 assignment in S2 2019 by Spike.
@@ -20,14 +20,14 @@ import edu.monash.fit2099.engine.Location;
  * @author ram
  *
  */
-public class HuntBehaviour implements Behaviour {
+public class HuntActorBehaviour implements Behaviour {
 
 	private Class<?> targetClass;
 	private String targetName; 
 	private int maxRange;
 	private HashSet<Location> visitedLocations = new HashSet<Location>();
 	
-	public HuntBehaviour(Class<?> cls, int range) {
+	public HuntActorBehaviour(Class<?> cls, int range) {
 		this.targetClass = cls;
 		this.targetName = targetClass.getSimpleName();
 		this.maxRange = range;

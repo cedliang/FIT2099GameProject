@@ -19,9 +19,9 @@ import edu.monash.fit2099.engine.DoNothingAction;
  */
 public class Human extends ZombieActor {
 	private Behaviour behaviours[] = {
-			//TODO remove this if cannot implement foragebehaviour class
-			//new ForageBehaviour(Food.class, 10), 
-			new WanderBehaviour()};
+			new HuntItemBehaviour(Food.class, 5), 
+			new WanderBehaviour()
+			};
 
 	/**
 	 * The default constructor creates default Humans
