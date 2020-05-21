@@ -5,17 +5,30 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 
+/**
+ * A class that represents Crop, a type of Ground that can be interacted with by Farmers and other Actors
+ * to yield Food, a PortableItem that has beneficial effects to Human Actors.
+ *
+ *@author Cedric Liang, Nathan Vaughan
+ */
 public class Crop extends Ground {
 
 	private int age;
 
+	/**
+	 * Constructor. By default, the Crop is created with the capability of being fertilised.
+	 * 
+	 */
 	public Crop() {
 		super('~');
 		age=0;		
 		addCapability(CropCapability.FERTILISABLE);
 	}
 	
-	
+	/**
+	 * Fertilises the crop. Adds 10 to its age and removes its ability to be fertilised again.
+	 *
+	 */
 	public void fertilise() {
 		assert (hasCapability(CropCapability.FERTILISABLE)==true); 
 
@@ -39,9 +52,9 @@ public class Crop extends Ground {
 			}
 		}
 	}
-	
+	@Override
 	/**
-	 * Permits player to harvest
+	 * Permits the Actor to harvest
 	 *
 	 * @param actor the Actor acting
 	 * @param location the current Location

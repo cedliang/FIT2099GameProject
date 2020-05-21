@@ -4,10 +4,21 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
-
+/**
+ * An Action that heals the Actor that calls this method and removes the consumed Food from the map
+ * or Actor inventory.
+ *
+ *@author Cedric Liang, Nathan Vaughan
+ */
 public class EatFoodAction extends Action {
 
 	private Food food;
+	
+	/**
+	 * Constructor
+	 *
+	 * @param food The food object to be consumed
+	 */
 	public EatFoodAction(Food food) {
 		this.food = food;
 	}

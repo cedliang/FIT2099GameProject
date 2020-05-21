@@ -4,11 +4,22 @@ import java.util.Random;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
 
+/**
+ * Special type of Corpse that reanimates as a Zombie 5-10 turns after creation.
+ * 
+ * @author Cedric Liang, Nathan Vaughan
+ *
+ */
 public class InfectedCorpse extends Corpse {
 	private int age;
 	private int reanimatesWhen;
 	private Random rand = new Random();
-		
+	
+	/**
+	 * Constructor
+	 *
+	 * @param actor The actor that the corpse belongs to.
+	 */
 	public InfectedCorpse(Actor actor) {
 		super(actor);
 		displayChar = '‰';

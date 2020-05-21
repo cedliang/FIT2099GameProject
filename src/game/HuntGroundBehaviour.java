@@ -5,12 +5,12 @@ import edu.monash.fit2099.engine.Location;
 
 
 /**
- * Returns a MoveAction that will take the Actor closer to the nearest instance of a Ground class.
+ * Returns a MoveAction that will take the Actor closer to the nearest instance of a Ground class
  * 
  * This uses a breadth-first search algorithm and is based on code written for the
  * FIT2099 assignment in S2 2019 by Spike.
  * 
- * @author ram
+ * @author Cedric Liang, Nathan Vaughan
  *
  */
 public class HuntGroundBehaviour extends HuntBehaviour {

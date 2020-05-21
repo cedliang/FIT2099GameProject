@@ -12,7 +12,9 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 
 /**
- * Returns a MoveAction that will take the Actor closer to the nearest instance of a Actor class.
+ * An abstract class that brings the caller Actor one square closer to an instance of anything.
+ * Implement the containsTarget method with logic that validates whether a candidate Location
+ * contains an instance of whatever class you're looking for.
  * 
  * This uses a breadth-first search algorithm and is based on code written for the
  * FIT2099 assignment in S2 2019 by Spike.

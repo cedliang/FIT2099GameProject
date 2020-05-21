@@ -8,6 +8,12 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.PickUpItemAction;
 
+/**
+ * A special Human that has access to FarmingBehaviour that allows the Farmer
+ * to interact with Crop tiles.
+ *
+ *@author Cedric Liang, Nathan Vaughan
+ */
 public class Farmer extends Human {
 	
 	//farmer specific behaviour
@@ -16,6 +22,11 @@ public class Farmer extends Human {
 	private HuntGroundBehaviour findCrop = new HuntGroundBehaviour(Crop.class,10);
 	private WanderBehaviour wanderBehaviour = new WanderBehaviour();
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param name Name of the farmer
+	 */
 	public Farmer(String name) {
 		super(name, 'F', 50);
 	}

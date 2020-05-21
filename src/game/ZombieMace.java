@@ -2,7 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.WeaponItem;
 /**
- * ??
+ * A zombie mace weapon. Can be crafted from ZombieLeg.
  * 
  * @author Cedric Liang, Nathan Vaughan
  *

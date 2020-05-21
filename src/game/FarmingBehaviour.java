@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import edu.monash.fit2099.engine.*;
 import java.util.Random;
 
-//A class that figures out what farming actions a Farmer can perform on a given turn.
 
+/**
+ * A class that figures out what farming Action a Farmer can perform on a given turn, depending
+ * on circumstances.
+ *
+ *@author Cedric Liang, Nathan Vaughan
+ */
 public class FarmingBehaviour implements Behaviour{
 	
 	private Random rand = new Random();
 	
+	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		
 		//Harvest, then fertilise, then sow

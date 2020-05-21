@@ -2,7 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.WeaponItem;
 /**
- * ??
+ * A zombie leg weapon. Can be crafted into a zombie mace.
  * 
  * @author Cedric Liang, Nathan Vaughan
  *
