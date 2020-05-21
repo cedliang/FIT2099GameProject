@@ -33,6 +33,9 @@ public class Crop extends Ground {
 			displayChar = '!';
 			if (hasCapability(CropCapability.HARVESTABLE)==false) {
 				addCapability(CropCapability.HARVESTABLE);
+			if (hasCapability(CropCapability.FERTILISABLE)==true) {
+				removeCapability(CropCapability.FERTILISABLE);
+			}
 			}
 		}
 	}
