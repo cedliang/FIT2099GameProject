@@ -86,7 +86,7 @@ public class Zombie extends ZombieActor {
 		// this does not use up their turn.
 		int probability = rand.nextInt(100);
 		if (probability < 10) {
-			display.println("Braaaaaaaaaaaaaaiinsssss");
+			display.println(this + " says Braaaaaaaaaaaaaaiinsssss");
 			return new DoNothingAction();
 		}
 		
@@ -163,19 +163,19 @@ public class Zombie extends ZombieActor {
 		int numberOfLimbs = (this.numberOfArms + this.numberOfLegs);
 		
 		if (numberOfLimbs > 0) {
-			if (prob < Math.pow(probToTakeLimbOff, 10)) {
+			if (prob < Math.pow(probToTakeLimbOff, 4)) {
 				// All limbs fall off with a probToTakeLimbOff^4 probability.
 				for (int i = 0; i < 4; i++) {
 					this.limbFallOff(map);
 				}
 			}
-			else if (prob < Math.pow(probToTakeLimbOff, 9)) {
+			else if (prob < Math.pow(probToTakeLimbOff, 3)) {
 				// 3 limbs fall off with a probToTakeLimbOff^3 probability.
 				for (int i = 0; i < 3; i++) {
 					this.limbFallOff(map);
 				}
 			}
-			else if (prob < Math.pow(probToTakeLimbOff, 8)) {
+			else if (prob < Math.pow(probToTakeLimbOff, 2)) {
 				// 2 limbs fall off with a probToTakeLimbOff^2 probability.
 				for (int i = 0; i < 2; i++) {
 					this.limbFallOff(map);

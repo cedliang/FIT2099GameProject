@@ -117,7 +117,7 @@ public class AttackAction extends Action {
 			probability = 50;
 		}
 		else if (weapon instanceof HumanPunch) {
-			probability = 100;
+			probability = 50;
 		}
 		return probability;
 	}
