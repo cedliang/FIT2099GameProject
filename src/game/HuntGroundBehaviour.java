@@ -19,7 +19,7 @@ public class HuntGroundBehaviour extends HuntBehaviour {
 		super(cls, range);
 	}
 
-	@Override
+
 	protected boolean containsTarget(Location here) {
 		Boolean returnBool = false;
 		

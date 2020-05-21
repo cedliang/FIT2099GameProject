@@ -9,7 +9,6 @@ public class HuntActorBehaviour extends HuntBehaviour {
 		super(cls, range);
 	}
 
-	@Override
 	protected boolean containsTarget(Location here) {
 		return (here.getActor() != null &&
 				targetClass.isInstance(here.getActor()));
