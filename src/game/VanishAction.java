@@ -17,49 +17,12 @@ public class VanishAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		
-		NumberRange width = map.getXRange();
-		NumberRange height = map.getYRange();
-		
-		int randomNumber1 = rand.nextInt(4);
-		
-		if (randomNumber1 == 0) {
-			xValue = width.min();
-			yValue = rand.nextInt(height.max());
-		}
-		else if (randomNumber1 == 1) {
-			xValue = width.max();
-			yValue = rand.nextInt(height.max());
-		}
-		else if (randomNumber1 == 2) {
-			xValue = rand.nextInt(width.max());
-			yValue = height.min();
-		}
-		else {
-			xValue = rand.nextInt(width.max());
-			yValue = height.max();
-		}
+		setXY(map);
 		
 		Location location = map.at(xValue, yValue);
 
 		while (map.isAnActorAt(location)) {
-			randomNumber1 = rand.nextInt(4);
-			
-			if (randomNumber1 == 0) {
-				xValue = width.min();
-				yValue = rand.nextInt(height.max());
-			}
-			else if (randomNumber1 == 1) {
-				xValue = width.max();
-				yValue = rand.nextInt(height.max());
-			}
-			else if (randomNumber1 == 2) {
-				xValue = rand.nextInt(width.max());
-				yValue = height.min();
-			}
-			else {
-				xValue = rand.nextInt(width.max());
-				yValue = height.max();
-			}
+			setXY(map);
 		}
 		
 		location.addItem(new MamboMarieTracker(actor, location));
@@ -72,5 +35,29 @@ public class VanishAction extends Action {
 		// TODO Auto-generated method stub
 		return actor + " vanishes from the map.";
 	}
-
+	
+	private void setXY(GameMap map) {
+		NumberRange width = map.getXRange();
+		NumberRange height = map.getYRange();
+		
+		int randomNumber1 = rand.nextInt(4);
+		
+		if (randomNumber1 == 0) {
+			this.xValue = width.min();
+			this.yValue = rand.nextInt(height.max());
+		}
+		else if (randomNumber1 == 1) {
+			this.xValue = width.max();
+			this.yValue = rand.nextInt(height.max());
+		}
+		else if (randomNumber1 == 2) {
+			this.xValue = rand.nextInt(width.max());
+			this.yValue = height.min();
+		}
+		else {
+			this.xValue = rand.nextInt(width.max());
+			this.yValue = height.max();
+		}
+	}
+	
 }

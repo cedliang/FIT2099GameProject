@@ -9,6 +9,7 @@ public class MamboMarieTracker extends StationaryItem {
 	protected String actorName;
 	protected Random rand = new Random();
 	protected int HP;
+	protected int tickCount = 0;
 	
 	/**
 	 * Constructor
@@ -24,7 +25,7 @@ public class MamboMarieTracker extends StationaryItem {
 	@Override
 	public void tick(Location currentLocation) {
 		int randomInt = rand.nextInt(20);
-		if (!(currentLocation.containsAnActor())) {
+		if (!(currentLocation.containsAnActor()) && tickCount != 0) {
 			if (randomInt == 0) {
 				MamboMarie newMamboMarie = new MamboMarie(actorName);
 				newMamboMarie.hurt(newMamboMarie.getCurrentHitPoints()-HP);
@@ -32,5 +33,6 @@ public class MamboMarieTracker extends StationaryItem {
 				currentLocation.removeItem(this);
 			}
 		}
+		tickCount++;
 	}
 }

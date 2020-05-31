@@ -12,7 +12,7 @@ public class MamboMarie extends ZombieActor {
 	private int turnCount = 0;
 	
 	public MamboMarie(String name) {
-		super(name, 'M', 100, ZombieCapability.ALIVE);
+		super(name, 'M', 100, ZombieCapability.UNDEAD);
 	}
 
 	@Override
