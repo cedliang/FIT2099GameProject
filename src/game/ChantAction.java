@@ -16,14 +16,10 @@ public class ChantAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		String[] zombies = {"Peckish", "Bitemark", "Nib", "Gobbles", "Bilk"};
-		NumberRange width = map.getXRange();
-		NumberRange height = map.getYRange();
 		for (String zombieName : zombies) {
-			xValue = random.nextInt(width.max());
-			yValue = random.nextInt(height.max());
+			setXY(map);
 			while (map.at(xValue, yValue).containsAnActor() || !(map.at(xValue, yValue).getGround().canActorEnter(actor))) {
-				xValue = random.nextInt(width.max());
-				yValue = random.nextInt(height.max());
+				setXY(map);
 			}
 			map.at(xValue, yValue).addActor(new Zombie(zombieName));
 		}	
@@ -33,5 +29,12 @@ public class ChantAction extends Action {
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " chants to spawn 5 zombies.";
+	}
+	
+	private void setXY(GameMap map) {
+		NumberRange width = map.getXRange();
+		NumberRange height = map.getYRange();
+		xValue = random.nextInt(width.max());
+		yValue = random.nextInt(height.max());
 	}
 }

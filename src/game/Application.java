@@ -82,7 +82,7 @@ public class Application {
 		gameMap.at(1, 10).addActor(new Zombie("Gaaaah"));
 		gameMap.at(62, 12).addActor(new Zombie("Aaargh"));	
 		
-		gameMap.at(0, 0).addActor(new MamboMarie("Mamboe Marie"));
+		gameMap.at(0, 0).addActor(new MamboMarie("Mambo Marie"));
 		
 		world.run();
 	}
