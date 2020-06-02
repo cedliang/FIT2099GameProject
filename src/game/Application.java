@@ -49,7 +49,7 @@ public class Application {
 		GameMap gameMap = new GameMap(groundFactory, map );
 		world.addGameMap(gameMap);
 		
-		Actor player = new Player("Player", '@', 100);
+		Actor player = new Player("Player", '@', 100, gameMap);
 		world.addPlayer(player, gameMap.at(42, 15));
 		
 	    // Place some random humans
@@ -75,14 +75,14 @@ public class Application {
 		gameMap.at(74, 20).addItem(new Plank());
 		
 		// FIXME: Add more zombies!
-		gameMap.at(30, 20).addActor(new Zombie("Groan"));
-		gameMap.at(30,  18).addActor(new Zombie("Boo"));
-		gameMap.at(10,  4).addActor(new Zombie("Uuuurgh"));
-		gameMap.at(50, 18).addActor(new Zombie("Mortalis"));
-		gameMap.at(1, 10).addActor(new Zombie("Gaaaah"));
-		gameMap.at(62, 12).addActor(new Zombie("Aaargh"));	
+//		gameMap.at(30, 20).addActor(new Zombie("Groan"));
+//		gameMap.at(30,  18).addActor(new Zombie("Boo"));
+//		gameMap.at(10,  4).addActor(new Zombie("Uuuurgh"));
+//		gameMap.at(50, 18).addActor(new Zombie("Mortalis"));
+//		gameMap.at(1, 10).addActor(new Zombie("Gaaaah"));
+//		gameMap.at(62, 12).addActor(new Zombie("Aaargh"));	
 		
-		gameMap.at(0, 0).addActor(new MamboMarie("Mambo Marie"));
+		gameMap.at(42, 14).addActor(new MamboMarie("Mambo Marie"));
 		
 		world.run();
 	}

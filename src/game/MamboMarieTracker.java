@@ -14,7 +14,7 @@ public class MamboMarieTracker extends StationaryItem {
 	/**
 	 * Constructor
 	 *
-	 * @param actor The actor that the corpse belongs to.
+	 * @param actor The actor that the tracker belongs to.
 	 */
 	public MamboMarieTracker(Actor actor, Location location) {
 		super(actor.toString() + " left overs", location.getGround().getDisplayChar());
