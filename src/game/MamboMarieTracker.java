@@ -4,7 +4,12 @@ import java.util.Random;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
-
+/**
+ * MamboMarieTracker is a StationaryItem that keeps track of MamboMarie when she is no longer
+ * on the map. This allows her to spawn back on the map.
+ * @author Cedric Liang, Nathan Vaughan
+ *
+ */
 public class MamboMarieTracker extends StationaryItem {
 	protected String actorName;
 	protected Random rand = new Random();
@@ -23,6 +28,10 @@ public class MamboMarieTracker extends StationaryItem {
 	}
 	
 	@Override
+	/**
+	 * Checks to see if MamboMarie is ready to appear back onto the map.
+	 * If she is, then she is spawned back onto the map with her previous HP.
+	 */
 	public void tick(Location currentLocation) {
 		int randomInt = rand.nextInt(20);
 		if (!(currentLocation.containsAnActor()) && tickCount != 0) {

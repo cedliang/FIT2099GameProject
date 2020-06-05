@@ -28,13 +28,14 @@ public class Player extends Human {
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		// If the Player uses an action that is not AimSniperAction, then concentration is reset
 		if (!(lastAction instanceof AimSniperAction)) {
 			this.concentration = 0;
 		}
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-		actions.add(new QuitAction());
+		actions.add(new QuitAction());	// Added a QuitAction to the actions list
 		return menu.showMenu(this, actions, display);
 	}	
 }

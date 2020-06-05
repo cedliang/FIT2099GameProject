@@ -5,11 +5,15 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
-
+/**
+ * Class representing MamboMarie.
+ * @author Cedric Liang, Nathan Vaughan
+ *
+ */
 public class MamboMarie extends ZombieActor {
 
 	private WanderBehaviour wanderBehaviour = new WanderBehaviour();
-	private int turnCount = 0;
+	private int turnCount = 0;	// Tracks the number of turns MamboMarie has played
 	
 	public MamboMarie(String name) {
 		super(name, 'M', 100, ZombieCapability.UNDEAD);
@@ -21,24 +25,20 @@ public class MamboMarie extends ZombieActor {
 	}
 	
 	@Override
-	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		// If she is not on the map, she has a 5% chance per turn of appearing
-		// She starts at the edge of the map and wanders randomly.
-		// Every 10 turns, she will stop and spend a turn chanting
-		// This will cause five new zombies to appear in random locations on the map.
-		// If she is not killed, she will vanish after 30 turns.
-		// Mambo Marie will keep coming back until she is killed.
-		
+	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {		
+		// Increment the turnCount each turn to track turns
 		turnCount++;
+		// If MamboMarie has played 30 turns, return VanishAction
 		if (turnCount == 30) {
 			//vanish
 			return new VanishAction();
 		}
+		// Every 10 turns, return ChantAction
 		if (turnCount % 10 == 0) {
 			//chant
 			return new ChantAction();
 		}
-		//wander
+		//otherwise, wander or do nothing
 		Action wanderAction = wanderBehaviour.getAction(this, map);
 		if (wanderAction != null)
 			return wanderAction;

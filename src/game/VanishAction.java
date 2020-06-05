@@ -7,7 +7,12 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.NumberRange;
-
+/**
+ * VanishAction allows MamboMarie to vanish from the map and adds an item tracker that allows MamboMarie to
+ * come back to the map.
+ * @author Cedric Liang, Nathan Vaughan
+ *
+ */
 public class VanishAction extends Action {
 	
 	protected Random rand = new Random();
@@ -36,6 +41,10 @@ public class VanishAction extends Action {
 		return actor + " vanishes from the map.";
 	}
 	
+	/**
+	 * Sets the x and y values for the new random location at the edges to add the MamboMarieTracker at.
+	 * @param map The map that MamboMarie was currently on
+	 */
 	private void setXY(GameMap map) {
 		NumberRange width = map.getXRange();
 		NumberRange height = map.getYRange();
