@@ -79,6 +79,16 @@ public class Human extends ZombieActor {
 	@Override
 	public void takeDamage(int damage, GameMap map) {
 		this.hurt(damage);
+		this.concentration = 0;
+	}
+	
+	@Override
+	public void setConcentration(int concentration) {
+		this.concentration = concentration;
 	}
 
+	@Override
+	public int getConcentration() {
+		return this.concentration;
+	}
 }

@@ -28,6 +28,9 @@ public class Player extends Human {
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		if (!(lastAction instanceof AimSniperAction)) {
+			this.concentration = 0;
+		}
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
