@@ -74,7 +74,7 @@ public class WorldExtended extends World {
 			for (int y = 0; y <= yRange.max(); y++) {
 				if (map.at(x, y).containsAnActor()) {
 					Actor actor = map.getActorAt(map.at(x, y));
-					if (actor.hasCapability(ZombieCapability.ALIVE) && (!(actor instanceof Player) && !(actor instanceof MamboMarie))) {
+					if (actor.hasCapability(ZombieCapability.ALIVE) && !(actor instanceof Player)) {
 						return false;
 					}
 				}
@@ -104,7 +104,7 @@ public class WorldExtended extends World {
 				}
 				if (map.at(x, y).containsAnActor()) {
 					Actor actor = map.getActorAt(map.at(x, y));
-					if (actor.hasCapability(ZombieCapability.UNDEAD) || (actor instanceof MamboMarie)) {
+					if (actor.hasCapability(ZombieCapability.UNDEAD)) {
 						return false;
 					}
 				}

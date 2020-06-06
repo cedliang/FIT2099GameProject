@@ -14,6 +14,7 @@ public class MamboMarie extends ZombieActor {
 
 	private WanderBehaviour wanderBehaviour = new WanderBehaviour();
 	private int turnCount = 0;	// Tracks the number of turns MamboMarie has played
+	private int numberOfTimesChanted = 0;
 	
 	public MamboMarie(String name) {
 		super(name, 'M', 100, ZombieCapability.UNDEAD);
@@ -40,7 +41,8 @@ public class MamboMarie extends ZombieActor {
 		// Every 10 turns, return ChantAction
 		if (turnCount % 10 == 0) {
 			//chant
-			return new ChantAction();
+			numberOfTimesChanted++;
+			return new ChantAction(numberOfTimesChanted);
 		}
 		//otherwise, wander or do nothing
 		Action wanderAction = wanderBehaviour.getAction(this, map);
@@ -48,5 +50,9 @@ public class MamboMarie extends ZombieActor {
 			return wanderAction;
 		//do nothing
 		return new DoNothingAction();
+	}
+	
+	public int getNumberOfTimesChanted() {
+		return numberOfTimesChanted;
 	}
 }

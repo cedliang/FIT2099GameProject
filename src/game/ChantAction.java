@@ -19,13 +19,12 @@ public class ChantAction extends Action {
 	private Random random = new Random();
 	private int xValue;
 	private int yValue;
-	
 	/**
 	 * Constructor, creates the 5 zombies and stores them in a list.
 	 */
-	public ChantAction() {
+	public ChantAction(int timesUsed) {
 		for (String zombieName : zombieNames) {
-			zombies.add(new Zombie(zombieName));
+			zombies.add(new Zombie(zombieName + " " + timesUsed));
 		}
 	}
 	
