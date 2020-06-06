@@ -1,6 +1,8 @@
 package game;
 
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
@@ -12,22 +14,31 @@ import edu.monash.fit2099.engine.NumberRange;
  *
  */
 public class ChantAction extends Action {
+	private List<Zombie> zombies = new ArrayList<Zombie>();
+	private String[] zombieNames = {"Peckish", "Bitemark", "Nib", "Gobbles", "Bilk"};
+	private Random random = new Random();
+	private int xValue;
+	private int yValue;
 	
-	protected Random random = new Random();
-	protected int xValue;
-	protected int yValue;
+	/**
+	 * Constructor, creates the 5 zombies and stores them in a list.
+	 */
+	public ChantAction() {
+		for (String zombieName : zombieNames) {
+			zombies.add(new Zombie(zombieName));
+		}
+	}
 	
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		String[] zombies = {"Peckish", "Bitemark", "Nib", "Gobbles", "Bilk"};
-		// Iterates through the names in the zombies list and creates a new Zombie at a random location
-		for (String zombieName : zombies) {
+		// Iterates through the Zombies that were newly created and adds them onto the map at a random location
+		for (Zombie zombie : zombies) {
 			setXY(map);
 			// Checks if there is an actor at the current location or if an actor cannot enter that location
 			while (map.at(xValue, yValue).containsAnActor() || !(map.at(xValue, yValue).getGround().canActorEnter(actor))) {
 				setXY(map);
 			}
-			map.at(xValue, yValue).addActor(new Zombie(zombieName));
+			map.at(xValue, yValue).addActor(zombie);
 		}	
 		return menuDescription(actor);
 	}

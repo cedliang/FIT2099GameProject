@@ -19,6 +19,10 @@ public class MamboMarie extends ZombieActor {
 		super(name, 'M', 100, ZombieCapability.UNDEAD);
 	}
 
+	public MamboMarie(String name, int hitPoints) {
+		super(name, 'M', hitPoints, ZombieCapability.UNDEAD);
+	}
+	
 	@Override
 	public void takeDamage(int damage, GameMap map) {
 		this.hurt(damage);

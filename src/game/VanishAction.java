@@ -37,7 +37,6 @@ public class VanishAction extends Action {
 
 	@Override
 	public String menuDescription(Actor actor) {
-		// TODO Auto-generated method stub
 		return actor + " vanishes from the map.";
 	}
 	
