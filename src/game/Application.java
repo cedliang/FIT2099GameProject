@@ -2,12 +2,13 @@ package game;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.World;
+
 
 /**
  * The main class for the zombie apocalypse game.
@@ -125,7 +126,7 @@ public class Application {
 		town.at(18, 9).addItem(new SniperRifle());
 
 		//houses
-		//doors are house1(18,6), house2(18,12), house3(38,6), house4(38,12), house5(58,6), house6(58,12)
+		//doors are house0(18,6), house1(18,12), house2(38,6), house3(38,12), house4(58,6), house5(58,12)
 		List<String> houseup= Arrays.asList(
 				"######.######",
 				"#...........#",
@@ -140,37 +141,53 @@ public class Application {
 				"#...........#",
 				"######.######"
 				);
-		GameMap house1 = new GameMap(groundFactory, housedown );
-		GameMap house2 = new GameMap(groundFactory, houseup );
-		GameMap house3 = new GameMap(groundFactory, housedown );
-		GameMap house4 = new GameMap(groundFactory, houseup );
-		GameMap house5 = new GameMap(groundFactory, housedown );
-		GameMap house6 = new GameMap(groundFactory, houseup );
-		world.addGameMap(house1);
-		world.addGameMap(house2);
-		world.addGameMap(house3);
-		world.addGameMap(house4);
-		world.addGameMap(house5);
-		world.addGameMap(house6);
 		
+		ArrayList<GameMap> houses = new ArrayList<GameMap>();
+		GameMap house0 = new GameMap(groundFactory, housedown );
+		houses.add(house0);
+		GameMap house1 = new GameMap(groundFactory, houseup );
+		houses.add(house1);
+		GameMap house2 = new GameMap(groundFactory, housedown );
+		houses.add(house2);
+		GameMap house3 = new GameMap(groundFactory, houseup );
+		houses.add(house3);
+		GameMap house4 = new GameMap(groundFactory, housedown );
+		houses.add(house4);
+		GameMap house5 = new GameMap(groundFactory, houseup );
+		houses.add(house5);
+		
+		//50% chance of human being in a house, 50% chance of 3 pieces of food
+		for (GameMap house : houses) {
+			world.addGameMap(house);
+			
+			if (Math.random()>0.5) {
+					house.at(6, 2).addActor(new Human("Bob the Townsman"));	
+				}
+			else {
+					for (int i=0; i<3; i++) {
+						house.at(6, 2).addItem(new Food());
+				}
+			}
+		}
+		
+		//doors to houses
+		town.at(18, 6).addItem(new Door(house0.at(6, 4)));
+		house0.at(6, 4).addItem(new Door(town.at(18, 6)));
+		
+		town.at(18, 12).addItem(new Door(house1.at(6, 0)));
+		house1.at(6, 0).addItem(new Door(town.at(18, 12)));
 
-		town.at(18, 6).addItem(new Door(house1.at(6, 4)));
-		house1.at(6, 4).addItem(new Door(town.at(18, 6)));
+		town.at(38, 6).addItem(new Door(house2.at(6, 4)));
+		house2.at(6, 4).addItem(new Door(town.at(38, 6)));
 		
-		town.at(18, 12).addItem(new Door(house2.at(6, 0)));
-		house2.at(6, 0).addItem(new Door(town.at(18, 12)));
-
-		town.at(38, 6).addItem(new Door(house3.at(6, 4)));
-		house3.at(6, 4).addItem(new Door(town.at(38, 6)));
+		town.at(38, 12).addItem(new Door(house3.at(6, 0)));
+		house3.at(6, 0).addItem(new Door(town.at(38, 12)));
 		
-		town.at(38, 12).addItem(new Door(house4.at(6, 0)));
-		house4.at(6, 0).addItem(new Door(town.at(38, 12)));
+		town.at(58, 6).addItem(new Door(house4.at(6, 4)));
+		house4.at(6, 4).addItem(new Door(town.at(58, 6)));
 		
-		town.at(58, 6).addItem(new Door(house5.at(6, 4)));
-		house5.at(6, 4).addItem(new Door(town.at(58, 6)));
-		
-		town.at(58, 12).addItem(new Door(house6.at(6, 0)));
-		house6.at(6, 0).addItem(new Door(town.at(58, 12)));
+		town.at(58, 12).addItem(new Door(house5.at(6, 0)));
+		house5.at(6, 0).addItem(new Door(town.at(58, 12)));
 		
 		
 		
