@@ -72,9 +72,9 @@ public class Application {
 		}
 		
 		//test portal
-		Vehicle portal=new Vehicle();
-		portal.setPortalDestination(compound.at(42, 15));
-		compound.at(44, 17).addItem(portal);
+//		Vehicle portal=new Vehicle();
+//		portal.setPortalDestination(compound.at(42, 15));
+//		compound.at(44, 17).addItem(portal);
 		
 		// place a simple weapon
 		compound.at(74, 20).addItem(new Plank());
