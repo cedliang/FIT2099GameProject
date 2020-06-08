@@ -14,15 +14,17 @@ public class TeleportAction extends Action {
 
 	private Location destination;
 	private String itemname;
+	private String verb;
 	
 	/**
 	 * Constructor
 	 *
 	 * @param destination the destination of teleportation
 	 */
-	public TeleportAction(Location destination, String itemdesc) {
+	public TeleportAction(Location destination, String itemdesc, String verb) {
 	this.destination= destination;
 	this.itemname=itemdesc;
+	this.verb=verb;
 	}
 	
 	
@@ -36,7 +38,7 @@ public class TeleportAction extends Action {
 
 	@Override
 	public String menuDescription(Actor actor) {
-		return actor + " travels using the " + itemname;
+		return actor + " "+verb+" using the " + itemname;
 	}
 
 }

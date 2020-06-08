@@ -74,8 +74,6 @@ public class Application {
 		
 		// place a simple weapon
 		compound.at(74, 20).addItem(new Plank());
-		compound.at(43, 15).addItem(new SniperRifle());
-		compound.at(50, 18).addItem(new SniperRifle());
 		// FIXME: Add more zombies!
 		compound.at(30, 20).addActor(new Zombie("Groan"));
 		compound.at(30,  18).addActor(new Zombie("Boo"));
@@ -88,18 +86,97 @@ public class Application {
 		
 		
 		
-		//test town, portal
-		List<String> townmap = Arrays.asList("...","...","...");
+		//create town
+		List<String> townmap = Arrays.asList(
+				"................................................................................",
+				"................................................................................",
+				"............#############.......#############.......#############...............",
+				"............#############.......#############.......#############...............",
+				"............#############.......#############.......#############...............",
+				"............#############.......#############.......#############...............",
+				"............######.######.......######.######.......######.######...............",
+				"...........+.............+.....+.............+.....+.............+..............",
+				"................................................................................",
+				"................................................................................",
+				"................................................................................",
+				"...........+.............+.....+.............+.....+.............+..............",
+				"............######.######.......######.######.......######.######...............",
+				"............#############.......#############.......#############...............",
+				"............#############.......#############.......#############...............",
+				"............#############.......#############.......#############...............",
+				"............#############.......#############.......#############...............",
+				"................................................................................",
+				".............................................................+++................",
+				".............................++++............................+++++++............",
+				"................................................................++..+...........",
+				".............++++......................++++.....................................",
+				"..............++................................................................",
+				".............+...............++.................................................",
+				"................................................................................"
+				);
 		GameMap town = new GameMap(groundFactory, townmap );
 		world.addGameMap(town);
 		
 		//portal to town
-		Vehicle portaltotown=new Vehicle(town.at(0, 0));
-		compound.at(44, 17).addItem(portaltotown);
+		compound.at(44, 17).addItem(new Vehicle(town.at(1, 12)));
 		//portal from town
-		Vehicle portalfromtown=new Vehicle(compound.at(44, 17));
-		town.at(0, 0).addItem(portalfromtown);
+		town.at(1, 12).addItem(new Vehicle(compound.at(44, 17)));
+		
+		town.at(18, 9).addItem(new SniperRifle());
 
+		//houses
+		//doors are house1(18,6), house2(18,12), house3(38,6), house4(38,12), house5(58,6), house6(58,12)
+		List<String> houseup= Arrays.asList(
+				"######.######",
+				"#...........#",
+				"#...........#",
+				"#...........#",
+				"#############"
+				);
+		List<String> housedown= Arrays.asList(
+				"#############",
+				"#...........#",
+				"#...........#",
+				"#...........#",
+				"######.######"
+				);
+		GameMap house1 = new GameMap(groundFactory, housedown );
+		GameMap house2 = new GameMap(groundFactory, houseup );
+		GameMap house3 = new GameMap(groundFactory, housedown );
+		GameMap house4 = new GameMap(groundFactory, houseup );
+		GameMap house5 = new GameMap(groundFactory, housedown );
+		GameMap house6 = new GameMap(groundFactory, houseup );
+		world.addGameMap(house1);
+		world.addGameMap(house2);
+		world.addGameMap(house3);
+		world.addGameMap(house4);
+		world.addGameMap(house5);
+		world.addGameMap(house6);
+		
+
+		town.at(18, 6).addItem(new Door(house1.at(6, 4)));
+		house1.at(6, 4).addItem(new Door(town.at(18, 6)));
+		
+		town.at(18, 12).addItem(new Door(house2.at(6, 0)));
+		house2.at(6, 0).addItem(new Door(town.at(18, 12)));
+
+		town.at(38, 6).addItem(new Door(house3.at(6, 4)));
+		house3.at(6, 4).addItem(new Door(town.at(38, 6)));
+		
+		town.at(38, 12).addItem(new Door(house4.at(6, 0)));
+		house4.at(6, 0).addItem(new Door(town.at(38, 12)));
+		
+		town.at(58, 6).addItem(new Door(house5.at(6, 4)));
+		house5.at(6, 4).addItem(new Door(town.at(58, 6)));
+		
+		town.at(58, 12).addItem(new Door(house6.at(6, 0)));
+		house6.at(6, 0).addItem(new Door(town.at(58, 12)));
+		
+		
+		
+		
+		
+		
 		
 		
 		

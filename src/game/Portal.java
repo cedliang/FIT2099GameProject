@@ -13,9 +13,11 @@ public class Portal extends StationaryItem {
 
 
 	private Location destination;
+	protected String verb;
 	public Portal(Location destination) {
 		super("portal", '*');
 		this.destination = destination;
+		this.verb="teleports";
 
 	}
 
@@ -26,7 +28,7 @@ public class Portal extends StationaryItem {
 		this.allowableActions = new Actions();
 		if ((destination != null) && (destination.containsAnActor() == false) && (destination.getGround().canActorEnter(new Human("")))) {
 			
-			allowableActions.add(new TeleportAction(destination,toString()));
+			allowableActions.add(new TeleportAction(destination,toString(),verb));
 			}
 	}
 	
