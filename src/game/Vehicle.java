@@ -7,15 +7,10 @@ import edu.monash.fit2099.engine.Location;
  */
 
 public class Vehicle extends Portal {
-	public Vehicle() {
-		super();
+	public Vehicle(Location location) {
+		super(location);
 		this.name="vehicle";
 		this.displayChar='V';
 	}
 	
-	@Override
-	public void setPortalDestination(Location destination) {
-		super.setPortalDestination(destination);
-		this.displayChar='V';
-	}
 }

@@ -20,7 +20,7 @@ public class Application {
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Fence(), new Tree());
 		
-		List<String> map = Arrays.asList(
+		List<String> compoundmap = Arrays.asList(
 		"................................................................................",
 		"................................................................................",
 		"....................................##########..................................",
@@ -46,7 +46,7 @@ public class Application {
 		".........................................................................++++...",
 		"..........................................................................++....",
 		"................................................................................");
-		GameMap compound = new GameMap(groundFactory, map );
+		GameMap compound = new GameMap(groundFactory, compoundmap );
 		world.addGameMap(compound);
 		
 		Actor player = new Player("Player", '@', 100);
@@ -71,10 +71,6 @@ public class Application {
 			}
 		}
 		
-		//test portal
-//		Vehicle portal=new Vehicle();
-//		portal.setPortalDestination(compound.at(42, 15));
-//		compound.at(44, 17).addItem(portal);
 		
 		// place a simple weapon
 		compound.at(74, 20).addItem(new Plank());
@@ -89,6 +85,23 @@ public class Application {
 		compound.at(62, 12).addActor(new Zombie("Aaargh"));	
 		
 		compound.at(0, 0).addActor(new MamboMarie("Mambo Marie"));
+		
+		
+		
+		//test town, portal
+		List<String> townmap = Arrays.asList("...","...","...");
+		GameMap town = new GameMap(groundFactory, townmap );
+		world.addGameMap(town);
+		
+		//portal to town
+		Vehicle portaltotown=new Vehicle(town.at(0, 0));
+		compound.at(44, 17).addItem(portaltotown);
+		//portal from town
+		Vehicle portalfromtown=new Vehicle(compound.at(44, 17));
+		town.at(0, 0).addItem(portalfromtown);
+
+		
+		
 		
 		world.run();
 	}
