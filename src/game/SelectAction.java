@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.Item;
 public class SelectAction extends Action {
 
 	private Actor Target;
-	private RangeWeaponItem Gun;
+	private SniperRifle Gun;
 	private Action actionSelected;
 	
 	/**
@@ -19,7 +19,7 @@ public class SelectAction extends Action {
 	 */
 	protected Random rand = new Random();
 	
-	public SelectAction(Actor target, RangeWeaponItem gun, Action Selected) {
+	public SelectAction(Actor target, SniperRifle gun, Action Selected) {
 		Target = target;
 		Gun = gun;
 		actionSelected = Selected;		
@@ -85,22 +85,22 @@ public class SelectAction extends Action {
 
 	@Override
 	public String menuDescription(Actor actor) {
-		// TODO Auto-generated method stub
+
 		return actor.toString() + " selects " + Target.toString();
 	}
 	
 	private double WeaponHitProb(Actor actor) {
-		if (Gun instanceof SniperRifle) {
-			if (actor.getConcentration() == 0) {
-				return 75;
-			}
-			else if (actor.getConcentration() == 1) {
-				return 90;
-			}
-			else {
-				return 100;
-			}
+
+		if (actor.getConcentration() == 0) {
+			return 75;
 		}
-		return 75;
+		else if (actor.getConcentration() == 1) {
+			return 90;
+		}
+
+		return 100;
+
+
+
 	}
 }

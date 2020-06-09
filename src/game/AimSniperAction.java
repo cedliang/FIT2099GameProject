@@ -9,15 +9,14 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Menu;
 import edu.monash.fit2099.engine.NumberRange;
-import edu.monash.fit2099.engine.WeaponItem;
 
 public class AimSniperAction extends Action {
 	
 	private Menu menu = new Menu();
-	private RangeWeaponItem Gun;
+	private SniperRifle Gun;
 	private Display display = new Display();
 	
-	public AimSniperAction(RangeWeaponItem gun) {
+	public AimSniperAction(SniperRifle gun) {
 		Gun = gun;
 	}
 	

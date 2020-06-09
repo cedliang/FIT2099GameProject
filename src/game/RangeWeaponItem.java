@@ -23,9 +23,5 @@ public class RangeWeaponItem extends WeaponItem {
 		return this.rangeVerb;
 	}
 	
-	public void chargeWeapon(Actor actor, Actor target) {
-		actor.setConcentration(actor.getConcentration()+1);
-		this.previousTarget = target;
-	}
 
 }

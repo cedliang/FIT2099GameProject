@@ -23,8 +23,9 @@ public class SniperRifle extends RangeWeaponItem {
 		return this.rangeDamage;
 	}
 	
-	public void chargeWeapon(Actor actor) {
+	public void chargeWeapon(Actor actor, Actor target) {
 		actor.setConcentration(actor.getConcentration()+1);
+		this.previousTarget = target;
 	}
 
 }
