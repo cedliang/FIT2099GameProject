@@ -49,7 +49,6 @@ public class AimSniperAction extends Action {
 
 	@Override
 	public String menuDescription(Actor actor) {
-		// TODO Auto-generated method stub
 		return actor.toString() + " aims with " + sniper.toString();
 	}
 

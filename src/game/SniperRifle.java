@@ -46,6 +46,9 @@ public class SniperRifle extends RangeWeaponItem {
 		for (int x = 0; x < xRange.max(); x++) {
 			for (int y = 0; y < yRange.max(); y++) {
 				Actor actor = map.getActorAt(map.at(x, y));
+				if (actor == null) {
+					continue;
+				}
 				if (actor.hasCapability(ZombieCapability.UNDEAD)) {
 					return true;
 				}
