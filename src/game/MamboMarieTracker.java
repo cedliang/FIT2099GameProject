@@ -14,7 +14,7 @@ public class MamboMarieTracker extends StationaryItem {
 	private String actorName;
 	private MamboMarie oldMamboMarie;
 	private Random rand = new Random();
-	private int HP;
+	private int hp;
 	private int tickCount = 0;
 	
 	/**
@@ -25,8 +25,8 @@ public class MamboMarieTracker extends StationaryItem {
 	public MamboMarieTracker(Actor actor, Location location) {
 		super(actor.toString() + " left overs", location.getGround().getDisplayChar());
 		actorName = actor.toString();
-		HP = actor.getCurrentHitPoints();
-		oldMamboMarie = new MamboMarie(actorName, HP);
+		hp = actor.getCurrentHitPoints();
+		oldMamboMarie = new MamboMarie(actorName, hp);
 	}
 	
 	@Override
