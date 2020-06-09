@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.Item;
 public class SelectTargetActorAction extends Action {
 
 	private Actor Target;
-	private SniperRifle Gun;
+	private SniperRifle sniper;
 	private Action actionSelected;
 	
 	/**
@@ -19,24 +19,24 @@ public class SelectTargetActorAction extends Action {
 	 */
 	protected Random rand = new Random();
 	
-	public SelectTargetActorAction(Actor target, SniperRifle gun, Action Selected) {
+	public SelectTargetActorAction(Actor target, SniperRifle gun, Action selected) {
 		Target = target;
-		Gun = gun;
-		actionSelected = Selected;		
+		sniper = gun;
+		actionSelected = selected;		
 	}
 
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		if (actionSelected instanceof AimSniperAction) {
-			if (Target != Gun.previousTarget) {
+			if (Target != sniper.previousTarget) {
 				actor.setConcentration(0);
 			}
-			Gun.chargeWeapon(actor, Target);
+			sniper.chargeWeapon(actor, Target);
 			return actor.toString() + " aims at " + Target.toString();
 		}
 		else if (actionSelected instanceof ShootSniperAction) {
 			
-			if (Target != Gun.previousTarget) {
+			if (Target != sniper.previousTarget) {
 				actor.setConcentration(0);
 			}
 //			Gun.chargeWeapon(actor, Target);
@@ -48,10 +48,10 @@ public class SelectTargetActorAction extends Action {
 				return actor + " misses " + Target + ".";
 			}
 			
-			int damage = Gun.rangeDamage(actor);
+			int damage = sniper.rangeDamage(actor);
 			Target.takeDamage(damage, map);
 			
-			String result = actor + " " + Gun.rangeVerb() + " " + Target + " for " + damage + " damage.";
+			String result = actor + " " + sniper.rangeVerb() + " " + Target + " for " + damage + " damage.";
 			
 			
 			if (!Target.isConscious()) {

@@ -13,11 +13,11 @@ import edu.monash.fit2099.engine.NumberRange;
 public class AimSniperAction extends Action {
 	
 	private Menu menu = new Menu();
-	private SniperRifle Gun;
+	private SniperRifle sniper;
 	private Display display = new Display();
 	
 	public AimSniperAction(SniperRifle gun) {
-		Gun = gun;
+		sniper = gun;
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class AimSniperAction extends Action {
 					continue;
 				}
 				if (target.hasCapability(ZombieCapability.UNDEAD)) {
-					list.add(new SelectTargetActorAction(target, Gun, this));
+					list.add(new SelectTargetActorAction(target, sniper, this));
 				}
 			}
 		}
@@ -50,7 +50,7 @@ public class AimSniperAction extends Action {
 	@Override
 	public String menuDescription(Actor actor) {
 		// TODO Auto-generated method stub
-		return actor.toString() + " aims with " + Gun.toString();
+		return actor.toString() + " aims with " + sniper.toString();
 	}
 
 }
