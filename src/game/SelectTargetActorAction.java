@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.Item;
 
 public class SelectTargetActorAction extends Action {
 
-	private Actor Target;
+	private Actor target;
 	private SniperRifle sniper;
 	private Action actionSelected;
 	
@@ -19,8 +19,8 @@ public class SelectTargetActorAction extends Action {
 	 */
 	protected Random rand = new Random();
 	
-	public SelectTargetActorAction(Actor target, SniperRifle gun, Action selected) {
-		Target = target;
+	public SelectTargetActorAction(Actor targetSelected, SniperRifle gun, Action selected) {
+		target = targetSelected;
 		sniper = gun;
 		actionSelected = selected;		
 	}
@@ -28,15 +28,15 @@ public class SelectTargetActorAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		if (actionSelected instanceof AimSniperAction) {
-			if (Target != sniper.previousTarget) {
+			if (target != sniper.previousTarget) {
 				actor.setConcentration(0);
 			}
-			sniper.chargeWeapon(actor, Target);
-			return actor.toString() + " aims at " + Target.toString();
+			sniper.chargeWeapon(actor, target);
+			return actor.toString() + " aims at " + target.toString();
 		}
 		else if (actionSelected instanceof ShootSniperAction) {
 			
-			if (Target != sniper.previousTarget) {
+			if (target != sniper.previousTarget) {
 				actor.setConcentration(0);
 			}
 //			Gun.chargeWeapon(actor, Target);
@@ -45,37 +45,37 @@ public class SelectTargetActorAction extends Action {
 			double randomNumber = rand.nextInt(100);
 			// Actor misses their target if the random number is greater than the probability to hit
 			if (randomNumber > probability) {
-				return actor + " misses " + Target + ".";
+				return actor + " misses " + target + ".";
 			}
 			
 			int damage = sniper.rangeDamage(actor);
-			Target.takeDamage(damage, map);
+			target.takeDamage(damage, map);
 			
-			String result = actor + " " + sniper.rangeVerb() + " " + Target + " for " + damage + " damage.";
+			String result = actor + " " + sniper.rangeVerb() + " " + target + " for " + damage + " damage.";
 			
 			
-			if (!Target.isConscious()) {
+			if (!target.isConscious()) {
 				result += System.lineSeparator();
 				Corpse corpse;
-				if ((actor.hasCapability(ZombieCapability.UNDEAD)) && (Target.hasCapability(ZombieCapability.ALIVE))){
-					corpse = new InfectedCorpse(Target);
+				if ((actor.hasCapability(ZombieCapability.UNDEAD)) && (target.hasCapability(ZombieCapability.ALIVE))){
+					corpse = new InfectedCorpse(target);
 				}
 				else {
-					corpse = new Corpse(Target);
+					corpse = new Corpse(target);
 				}
 
-				map.locationOf(Target).addItem(corpse);
+				map.locationOf(target).addItem(corpse);
 				
 				Actions dropActions = new Actions();
-				for (Item item : Target.getInventory())
+				for (Item item : target.getInventory())
 					dropActions.add(item.getDropAction());
 				for (Action drop : dropActions)		
-					drop.execute(Target, map);
-				map.removeActor(Target);	
+					drop.execute(target, map);
+				map.removeActor(target);	
 				
 				actor.setConcentration(0);
 				
-				result += Target + " is killed.";
+				result += target + " is killed.";
 			}
 			
 			return result;
@@ -86,7 +86,7 @@ public class SelectTargetActorAction extends Action {
 	@Override
 	public String menuDescription(Actor actor) {
 
-		return actor.toString() + " selects " + Target.toString();
+		return actor.toString() + " selects " + target.toString();
 	}
 	
 	private double WeaponHitProb(Actor actor) {
