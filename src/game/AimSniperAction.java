@@ -35,7 +35,7 @@ public class AimSniperAction extends Action {
 					continue;
 				}
 				if (target.hasCapability(ZombieCapability.UNDEAD)) {
-					list.add(new SelectAction(target, Gun, this));
+					list.add(new SelectTargetActorAction(target, Gun, this));
 				}
 			}
 		}

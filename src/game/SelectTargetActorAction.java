@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 
-public class SelectAction extends Action {
+public class SelectTargetActorAction extends Action {
 
 	private Actor Target;
 	private SniperRifle Gun;
@@ -19,7 +19,7 @@ public class SelectAction extends Action {
 	 */
 	protected Random rand = new Random();
 	
-	public SelectAction(Actor target, SniperRifle gun, Action Selected) {
+	public SelectTargetActorAction(Actor target, SniperRifle gun, Action Selected) {
 		Target = target;
 		Gun = gun;
 		actionSelected = Selected;		
