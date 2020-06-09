@@ -123,7 +123,8 @@ public class Application {
 		//portal from town
 		town.at(1, 12).addItem(new Vehicle(compound.at(44, 17)));
 		
-		town.at(18, 9).addItem(new SniperRifle());
+		//sniper located far from vehicle, can go for it to have a guaranteed chance or can search buildings for chance of a sniper rifle
+		town.at(77, 9).addItem(new SniperRifle());
 
 		//houses
 		//doors are house0(18,6), house1(18,12), house2(38,6), house3(38,12), house4(58,6), house5(58,12)
@@ -167,6 +168,12 @@ public class Application {
 					for (int i=0; i<3; i++) {
 						house.at(6, 2).addItem(new Food());
 				}
+					
+			//33% chance of a house also containing a sniper rifle
+			if (Math.random()<0.33) {
+				house.at(1,1).addItem(new SniperRifle());
+			}
+					
 			}
 		}
 		
