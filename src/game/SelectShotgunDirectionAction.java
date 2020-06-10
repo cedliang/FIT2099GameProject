@@ -22,15 +22,12 @@ public class SelectShotgunDirectionAction extends Action {
 	public String execute(Actor actor, GameMap map) {
 		Actions actionsList  = new Actions();
 		
-		actionsList.add(new ShootShotgunAction(shotgun,"N"));
-		actionsList.add(new ShootShotgunAction(shotgun,"S"));
-		actionsList.add(new ShootShotgunAction(shotgun,"E"));
-		actionsList.add(new ShootShotgunAction(shotgun,"W"));
-		actionsList.add(new ShootShotgunAction(shotgun,"NE"));
-		actionsList.add(new ShootShotgunAction(shotgun,"SE"));
-		actionsList.add(new ShootShotgunAction(shotgun,"NW"));
-		actionsList.add(new ShootShotgunAction(shotgun,"SW"));
+		String[] directionArray = {"N","S","E","W","NE","SE","NW","SW"};
 		
+		for (String i : directionArray) {
+			actionsList.add(new ShootShotgunAction(shotgun,i));
+		}
+
 		Action playerSelectedAction = menu.showMenu(actor, actionsList, display);
 		return playerSelectedAction.execute(actor, map);
 	}
