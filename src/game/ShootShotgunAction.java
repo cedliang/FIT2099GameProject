@@ -7,15 +7,37 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+/**
+ * Action that corresponds to shooting the shotgun, calculating the area of damage affected and dealing damage to all affected Actors, good or bad.
+ *
+ *@author Cedric Liang, Nathan Vaughan
+ */
 public class ShootShotgunAction extends Action {
 	Shotgun shotgun;
 	String direction; 
 	//direction is string "N", "S", "E", "W", "NE", "SE", "NW", "SW"
+	
+	/**
+	 * Constructs a ShootShotgunAction
+	 * 
+	 * @param shotgun the shotgun that is shooting
+	 * @param direction the direction of shot. Must be one of "N", "S", "E", "W", "NE", "SE", "NW", "SW".
+	 *
+	 * @throws IllegalArgumentException if the direction string fed is not a valid cardinal direction string
+	 */
 	public ShootShotgunAction(Shotgun shotgun,String direction) {
 		this.shotgun = shotgun;
 		this.direction = direction;
+		
+		if (!Arrays.asList("N","S","E","W","NE","SE","NW","SW").contains(direction)) {
+			throw new IllegalArgumentException("Direction String is not valid direction");
+		}
 	}
+	
+	
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		

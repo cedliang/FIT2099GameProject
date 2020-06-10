@@ -7,13 +7,23 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
 
+/**
+ * Allows the player to select a direction for shooting the shotgun. Calls an instance of ShootShotgunAction with the selected direction.
+ *
+ *@author Cedric Liang, Nathan Vaughan
+ */
 public class SelectShotgunDirectionAction extends Action {
 	
 	private Display display = new Display();
 	private Menu menu = new Menu();
 	private Shotgun shotgun;
 
-	
+	/**
+	 * Constructs a SelectShotgunDirectionAction
+	 * 
+	 * @param Shotgun the shotgun that is shooting
+	 *
+	 */
 	public SelectShotgunDirectionAction (Shotgun shotgun) {
 		this.shotgun = shotgun;
 	}
