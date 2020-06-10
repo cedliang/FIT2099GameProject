@@ -66,7 +66,7 @@ public class ShootShotgunAction extends Action {
 
 	@Override
 	public String menuDescription(Actor actor) {
-		return actor.toString() + " blasts with " + shotgun.toString();
+		return actor.toString() + " blasts with " + shotgun.toString()+" "+direction;
 	}
 	
 	
