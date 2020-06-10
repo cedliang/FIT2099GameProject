@@ -85,7 +85,7 @@ public class Application {
 		
 		compound.at(0, 0).addActor(new MamboMarie("Mambo Marie"));
 		
-		compound.at(43,15).addItem(new Shotgun());
+
 		compound.at(41,15).addItem(new Ammo());
 		
 		//create town
@@ -125,8 +125,9 @@ public class Application {
 		town.at(1, 12).addItem(new Vehicle(compound.at(44, 17)));
 		
 		//sniper located far from vehicle, can go for it to have a guaranteed chance or can search buildings for chance of a sniper rifle
-		town.at(77, 9).addItem(new SniperRifle());
-
+		town.at(3, 9).addItem(new SniperRifle());
+		town.at(4,8).addItem(new Shotgun());
+		
 		//houses
 		//doors are house0(18,6), house1(18,12), house2(38,6), house3(38,12), house4(58,6), house5(58,12)
 		List<String> houseup= Arrays.asList(
@@ -158,7 +159,7 @@ public class Application {
 		GameMap house5 = new GameMap(groundFactory, houseup );
 		houses.add(house5);
 		
-		//50% chance of human being in a house, 50% chance of 3 pieces of food
+		//50% chance of human being in a house, 50% chance of 3 pieces of food and 5 rounds of ammo
 		for (GameMap house : houses) {
 			world.addGameMap(house);
 			
@@ -169,13 +170,14 @@ public class Application {
 					for (int i=0; i<3; i++) {
 						house.at(6, 2).addItem(new Food());
 				}
+					for (int i=0; i<5; i++) {
+						house.at(1, 1).addItem(new Ammo());
+				}
 					
-			//33% chance of a house also containing a sniper rifle
-			if (Math.random()<0.33) {
-				house.at(1,1).addItem(new SniperRifle());
+
 			}
 					
-			}
+			
 		}
 		
 		//doors to houses
@@ -199,9 +201,9 @@ public class Application {
 		
 		
 		
-		
-		
-		
+		town.at(48, 8).addActor(new Human("Bob the Townsman"));	
+		town.at(28, 8).addActor(new Human("Bob the Townsman"));	
+		town.at(8, 8).addActor(new Human("Bob the Townsman"));	
 		
 		
 		
