@@ -18,6 +18,7 @@ public class SelectShotgunDirectionAction extends Action {
 		this.shotgun = shotgun;
 	}
 	
+	//precondition: shotgun is in the inventory, and the same actor also has ammo
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		Actions actionsList  = new Actions();

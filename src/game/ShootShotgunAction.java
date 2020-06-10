@@ -18,7 +18,22 @@ public class ShootShotgunAction extends Action {
 	}
 	@Override
 	public String execute(Actor actor, GameMap map) {
-
+		
+		//precondition that actor has ammo
+		Item ammo = null;
+		for (Item i :actor.getInventory()) {
+			if (i instanceof Ammo) {
+				ammo = i;
+			}
+		}
+		
+		if (ammo == null) {
+			throw new IllegalArgumentException("An actor without ammo is trying to use ShootShotgunAction");
+		}
+		
+		actor.removeItemFromInventory(ammo);
+		
+		
 		ArrayList<Actor> affectedActors = new ArrayList<Actor>();
 		for (Location l : affectedLocation(direction, actor, map)) {
 			if (l.containsAnActor()) {

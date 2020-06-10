@@ -86,6 +86,7 @@ public class Application {
 		compound.at(0, 0).addActor(new MamboMarie("Mambo Marie"));
 		
 		compound.at(43,15).addItem(new Shotgun());
+		compound.at(41,15).addItem(new Ammo());
 		
 		//create town
 		List<String> townmap = Arrays.asList(
