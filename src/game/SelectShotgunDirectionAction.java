@@ -21,7 +21,7 @@ public class SelectShotgunDirectionAction extends Action {
 	/**
 	 * Constructs a SelectShotgunDirectionAction
 	 * 
-	 * @param Shotgun the shotgun that is shooting
+	 * @param shotgun the shotgun that is shooting
 	 *
 	 */
 	public SelectShotgunDirectionAction (Shotgun shotgun) {
